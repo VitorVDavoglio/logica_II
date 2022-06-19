@@ -8,7 +8,7 @@
 </head>
 <body>
     
-    <canvas width="600" height="400"></canvas>
+    <canvas width="1200" height="400"></canvas>
 
     <script>
 
@@ -34,6 +34,30 @@
         pincel.lineTo(250,325);
         pincel.fill();
 
+        //segundo código
+
+        pincel.fillStyle = 'darkgrey';
+        pincel.fillRect(600,0, 600,400);
+
+        function desenha_esquadro(xa, ya, xc, yc, cor) {
+            
+            pincel.fillStyle = cor;
+            pincel.beginPath();
+            pincel.moveTo(xa,ya);
+            pincel.lineTo(xa,yc);
+            pincel.lineTo(xc,yc);
+            pincel.fill();
+            
+            pincel.fillStyle = 'white';
+            pincel.beginPath();
+            pincel.moveTo((6*xa + xc)/7, (9*ya+5*yc)/14);
+            pincel.lineTo((6*xa + xc)/7, (ya+6*yc)/7);
+            pincel.lineTo((5*xa+9*xc)/14, (ya+6*yc)/7);
+            pincel.fill();
+            
+        }
+
+        desenha_esquadro(650,50,950,350, 'black');
 
     </script>
 </body>

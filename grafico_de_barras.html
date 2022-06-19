@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grafico de barras</title>
+</head>
+<body>
+    
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+          
+        function desenha_retangulo(x,y,largura,altura,cor) {
+            
+            var tela = document.querySelector('canvas');
+            var pincel = tela.getContext('2d');
+            
+            pincel.fillStyle = cor;
+            pincel.fillRect(x,y,largura,altura);
+            pincel.strokeStyle = 'black';
+            pincel.strokeRect(x,y,largura,altura);
+            
+        }
+        
+        function desenha_texto(x,y,texto) {
+            
+            var tela = document.querySelector('canvas');
+            var pincel = tela.getContext('2d');
+            
+            pincel.font = '15px Georgia';
+            pincel.fillStyle = 'black';
+            pincel.fillText(texto,x,y);
+            
+        }
+
+        function desenha_barra(x,y,serie,cores,texto) {
+            
+            desenha_texto(x,y-10,texto);
+            var soma_altura = 0; //variavel auxiliar
+
+            for (var i = 0; i < serie.length; i++) {
+                var altura = serie[i];
+                desenha_retangulo(x,y + soma_altura,50,altura,cores[i]);
+                soma_altura = soma_altura + altura;
+
+            }
+       }
+
+        var cores = ['blue','green','yellow','red'];
+
+        var serie_2015 = [50,25,20,5];
+        var serie_2016 = [65,20,13,2];
+
+        desenha_barra(50,50, serie_2015,cores,'2015');
+        desenha_barra(150,50, serie_2016,cores,'2016');
+
+
+    </script>
+</body>
+</html>
