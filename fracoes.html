@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>frações</title>
+</head>
+<body>
+    
+    <canvas width="1090" height="400"></canvas>
+
+    <script>
+        
+        var tela = document.querySelector('canvas');
+        var pincel = tela.getContext('2d');
+
+        pincel.fillStyle = 'lightgray';
+        pincel.fillRect(0,0, 1090,400);
+
+        function desenha_quadrado(preenchido, total) {
+
+            for(var quantidade = 0; quantidade < preenchido; quantidade++) {
+
+                var coordenadas = (preenchido * 45) + 50
+                for(var x = 50; x < coordenadas ; x = x + 45) {
+                    pincel.fillStyle = 'green';
+                    pincel.fillRect(x,60,45,45);
+                    pincel.stroke = 'black'
+                    pincel.strokeRect(x,60,45,45);
+                }
+            }
+
+            for(var quantidade = 0; quantidade < total; quantidade++){
+                
+                var coordenadas = (total * 45) + 50;
+                for(var x = 50; x < coordenadas ; x = x + 45) {
+
+                    pincel.stroke = 'black';
+                    pincel.strokeRect(x,60,45,45);
+                }
+            }
+
+        }    
+        
+        function desenha_texto(texto,x,y) {
+            var tela = document.querySelector('canvas');
+            var pincel = tela.getContext('2d');
+
+            pincel.font = '20px Georgia';
+            pincel.fillStyle = 'black';
+            pincel.fillText(texto,x,y);
+
+        }
+
+        desenha_texto("Qual é a fração?",50,30);
+       
+        //desenha_quadrado(a/b);
+        desenha_quadrado(10,22);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>programa2</title>
+</head>
+<body>
+    
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+
+        function desenha_quadrado(x,y, cor) {
+            
+            var tela = document.querySelector('canvas');
+            var pincel = tela.getContext('2d');
+    
+            pincel.fillStyle = cor ;
+            pincel.fillRect(x,y, 50,50);
+            pincel.stroke = 'black';
+            pincel.strokeRect(x,y, 50,50);
+
+        }
+
+        for(var x = 0; x <  600 ; x = x + 50) {
+            
+            desenha_quadrado(x,0, 'red');
+            document.write("<br>")
+            desenha_quadrado(x,50, 'green');
+            document.write("<br>")
+            desenha_quadrado(x,100, 'blue');
+            
+        }
+
+    </script>
+</body>
+</html>
