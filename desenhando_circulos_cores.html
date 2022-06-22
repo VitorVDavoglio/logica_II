@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>desenhando cículos mudando as cores</title>
+</head>
+<body>
+    
+    <canvas width="600" height="400"></canvas>
+    <script>
+
+        var tela =  document.querySelector('canvas');
+        var pincel = tela.getContext('2d');
+
+        pincel.fillStyle = 'lightgrey';
+        pincel.fillRect(0,0, 600,400);
+
+        var cor = ['blue','red','green'];
+        var indice_cor_atual = 0; //começa com a blue.
+
+        function desenha_circulo(evento) {
+            
+            var x = evento.pageX - tela.offsetLeft;
+            var y = evento.pageY - tela.offsetTop;
+            pincel.fillStyle = cor[indice_cor_atual];
+            pincel.beginPath();
+            pincel.arc(x,y,10,0,2 * 3.14);
+            pincel.fill();
+            console.log(x + ' , ' + y);
+
+        }
+
+        tela.onclick = desenha_circulo;
+
+
+        function mudar_cor() {
+            indice_cor_atual++;
+
+            if(indice_cor_atual >= cor.length) {
+                indice_cor_atual = 0; //volta para a primeira cor: blue.
+            }
+            alert(indice_cor_atual);
+
+            return false; //Para não exibir um padrão do canvas.
+        }
+
+        tela.oncontextmenu = mudar_cor;
+
+
+    </script>
+</body>
+</html>
