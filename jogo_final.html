@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerte o alvo!</title>
+</head>
+<body>
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        var tela = document.querySelector('canvas');
+        var pincel = tela.getContext('2d');
+        
+        pincel.fillStyle = 'lightgrey';
+        pincel.fillRect(0, 0, 600, 400);
+
+        var centro_x = 0;
+        var centro_y = 0;
+        var raio = 10;
+        
+        function sorteando_posicao(maximo) {
+
+            return Math.floor(Math.random() * maximo);
+        }
+        
+        function desenha_circulo(centro_x, centro_y, raio, cor) {
+            
+            pincel.fillStyle = cor;
+            pincel.beginPath();
+            pincel.arc(centro_x, centro_y, raio, 0, 2 * Math.PI);
+            pincel.fill();
+            
+        }
+        
+        function desenha_alvo(centro_x, centro_y, raio) {
+            
+            desenha_circulo(centro_x, centro_y, raio + 20, 'red');
+            desenha_circulo(centro_x, centro_y, raio + 10, 'white');
+            desenha_circulo(centro_x, centro_y, raio, 'red');
+            
+        }
+        
+        function limpa_tela() {
+            pincel.clearRect(0, 0, 600, 400);
+        }
+        
+        function atualiza_tela() {
+            
+            limpa_tela();
+            centro_x = sorteando_posicao(580);
+            centro_y = sorteando_posicao(380)
+            desenha_alvo(centro_x, centro_y, raio);
+
+        }
+
+        setInterval(() => {
+            atualiza_tela();
+        }, 800);
+
+        function dispara(evento) {
+            var x = evento.pageX - tela.offsetLeft;
+            var y = evento.pageY - tela.offsetTop;
+
+            if( (x > centro_x - raio) && (x < centro_x + raio) && 
+                (y > centro_y - raio) && (y < centro_y + raio) ) {
+
+                alert('Acertou!');
+            }
+        }
+
+        tela.onclick = dispara ;
+
+    </script>
+</body>
+</html>

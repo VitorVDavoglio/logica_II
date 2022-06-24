@@ -7,6 +7,8 @@
     <title>Círculos maiores</title>
 </head>
 <body>
+    <h1>Teclas usadas:</h1>
+    <p>Tecla ALT deixa o raio menor, tecla SHIFT deixa o raio maior.</p>
     
     <canvas width="600" height="400"></canvas>
     
@@ -30,7 +32,7 @@
             if(evento.shiftKey && raio <= 40) {
                 raio = raio + 5;
             }
-            if(evento.altKey && raio >= 10) {
+            else if(evento.altKey && raio >= 10) {
                 raio = raio - 5;
             }
             pincel.arc(x,y,raio,0,2 * 3.14);

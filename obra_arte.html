@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A obra de arte!</title>
+</head>
+<body>
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        
+        var tela = document.querySelector('canvas');
+        var pincel = tela.getContext('2d');
+        
+        pincel.fillStyle = 'lightgray';
+        pincel.fillRect(0, 0, 600, 400);
+
+        var desenha = false;
+        var tamanho = 50;
+        var cor_atual = 'green';
+        var x_preto = 0;
+        var x_azul = 50;
+        var x_verde = 100;
+        var x_vermelho = 150;
+        var y_quadrados = 0;
+
+        function desenha_quadrado(x, y, tamanho, cor) {
+
+            pincel.fillStyle = cor;
+            pincel.fillRect(x, y, tamanho, tamanho);
+            pincel.fill();
+
+        }
+
+        function desenha_paleta_de_cores() {
+
+            desenha_quadrado(x_preto, y_quadrados, tamanho, 'black');
+            desenha_quadrado(x_azul, y_quadrados, tamanho, 'blue');
+            desenha_quadrado(x_verde, y_quadrados, tamanho, 'green');
+            desenha_quadrado(x_vermelho, y_quadrados, tamanho, 'red');
+
+        }
+
+        function desenha_circulo(x, y, raio, cor) {
+
+            if( x > 10 && x < 590 && y > 60 && y < 390) {
+
+                pincel.fillStyle = cor;
+                pincel.beginPath();
+                pincel.arc(x, y, raio, 0, 2 * Math.PI);
+                pincel.fill();
+
+            }
+        }
+
+        function escolhe_cor(evento) {
+
+            var x = evento.pageX  - tela.offsetLeft;
+            var y =  evento.pageY - tela.offsetTop;
+
+            if(x > x_preto && (x < x_preto + tamanho) && y <= tamanho) {
+                cor_atual = 'black';
+            } 
+            else if(x > x_azul && (x < x_azul + tamanho) && y <= tamanho) {
+                cor_atual = 'blue';
+            }
+            else if(x > x_verde && (x < x_verde + tamanho) && y <= tamanho) {
+                cor_atual = 'green';
+            }
+            else if(x > x_vermelho && (x < x_vermelho + tamanho) && y <= tamanho) {
+                cor_atual = 'red';
+            }
+        }
+
+        function lida_movimento_mouse(evento) {
+
+            var x = evento.pageX - tela.offsetLeft;
+            var y = evento.pageY - tela.offsetTop;
+
+            if(desenha) {
+                desenha_circulo(x, y, 5, cor_atual);
+            }
+        }
+
+        function habilita_desenhar() {
+            desenha = true;
+        }
+
+        function desebilita_desenhar() {
+            desenha = false;
+        }
+
+        desenha_paleta_de_cores();
+
+        tela.onclick = escolhe_cor;
+        tela.onmousemove = lida_movimento_mouse;
+        tela.onmousedown = habilita_desenhar;
+        tela.onmouseup = desebilita_desenhar;
+
+    </script>
+</body>
+</html>
